@@ -89,3 +89,10 @@ ORDER BY 1,2,3
 --SELECT *, (vaccination_progress / population ) * 100 
 --FROM VacPop
 --WHERE location = 'United States'
+
+-- Total tests per thousand citizens per country
+SELECT location, SUM(CAST(new_tests_smoothed_per_thousand AS float)) AS sum_tests_per_thousand
+FROM PortfolioProject..CovidVaccinations
+WHERE  new_tests_per_thousand IS NOT NULL 
+GROUP BY location
+ORDER BY sum_tests_per_thousand DESC 
