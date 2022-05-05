@@ -36,8 +36,6 @@ FROM PortfolioProject..SephoraData
 WHERE category = 'Lipstick'
 ORDER BY price ASC 
 
-
-
 -- Most liked foundation
 SELECT TOP 1 name, brand, category, love, rating
 FROM PortfolioProject..SephoraData
@@ -74,8 +72,10 @@ FROM PortfolioProject..SephoraData
 GROUP BY brand
 ORDER BY avg_brand_price DESC 
 
-
-
+-- Lowest and highest price of products per category
+SELECT category, MIN(price) AS lowest_price, MAX(price) AS highest_price
+FROM PortfolioProject..SephoraData
+GROUP BY category
 
 
 
