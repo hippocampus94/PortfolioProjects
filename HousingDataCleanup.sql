@@ -15,7 +15,7 @@
 	-- Checking for null values in PropertyAddress column
 	SELECT *
 	FROM PortfolioProject..NashvilleHousing
-	--WHERE PropertyAddress IS NULL
+	WHERE PropertyAddress IS NULL
 	ORDER BY ParcelID
 
 	-- Populating empty PropertyAddress rows with addresses sharing the same ParcelID
@@ -102,7 +102,8 @@
 		END 
 
 
-		-- Removing duplicates 
+	-- Removing duplicates 
+	
 	WITH RowNumCTE AS ( 
 	SELECT *,
 		ROW_NUMBER() OVER (
