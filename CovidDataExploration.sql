@@ -30,15 +30,7 @@ SELECT location, MAX((total_cases)) AS highest_infection_count, population, MAX(
 FROM PortfolioProject..CovidDeaths
 GROUP BY population, location
 ORDER BY population_infection_perc DESC
- -- WHERE location LIKE 'Pol%'
 
-
-
-
---SELECT location, MAX(total_deaths) AS highest_death_count, population, MAX((total_deaths/population))* 100 AS population_death_perc
---FROM PortfolioProject..CovidDeaths
---GROUP BY location, population
---ORDER BY population_death_perc DESC
 
  -- Highest death count per country
 SELECT location, MAX(cast(total_deaths AS int)) AS total_death_count
@@ -74,21 +66,6 @@ AND v.date = d.date
 WHERE d.continent IS NOT NULL 
 ORDER BY 1,2,3 
 
----- CTE
---WITH VacPop (continent, location, date, population, new_vaccinations, vaccination_progress)
---AS (
---SELECT d.continent, d.location, d.date, d.population, v.new_vaccinations,
---SUM(CONVERT(bigint, v.new_vaccinations)) OVER (PARTITION BY d.location ORDER BY d.location, d.date) AS vaccination_progress
---FROM PortfolioProject..CovidVaccinations AS v
---JOIN PortfolioProject..CovidDeaths AS d 
---ON v.location = d.location
---AND v.date = d.date
---WHERE d.continent IS NOT NULL
-----ORDER BY 1,2,3
---)
---SELECT *, (vaccination_progress / population ) * 100 
---FROM VacPop
---WHERE location = 'United States'
 
 -- Total tests per thousand citizens per country
 SELECT location, SUM(CAST(new_tests_smoothed_per_thousand AS float)) AS sum_tests_per_thousand
